@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+:root {
+  --bg-clr: #fbfcff;
+  --main-clr: #38558a;
+  --header-height: 70px;
+}
+
+@theme {
+  --color-bg-clr: var(--bg-clr);
+  --color-main-clr: var(--main-clr);
+}
+
+@layer {
+  .myContainer {
+    @apply container px-4 mx-auto;
+  }
+
+  .mySection {
+    @apply min-h-[calc(100dvh-var(--header-height))] mt-[var(--header-height)];
+  }
+
+  .myBtn {
+    @apply bg-main-clr text-white text-lg lg:text-xl font-semibold px-2 py-1 lg:px-4 lg:py-2 
+    rounded-lg border-2 border-main-clr hover:brightness-70 duration-200 flex items-center gap-2 cursor-pointer;
+
+    &.light {
+      @apply bg-white text-main-clr;
+    }
+
+    &.danger {
+      @apply bg-red-700 text-white border-red-700;
+    }
+  }
+
+  .navLink {
+    @apply text-4xl xl:text-xl xl:h-full flex items-center gap-1 content-center relative;
+
+    &::after {
+      @apply content-[''] absolute w-0 h-[3px] bg-main-clr left-0 
+      bottom-[-3px] xl:bottom-5 rounded-full duration-200;
+    }
+
+    &.active,
+    &:hover {
+      @apply after:w-full;
+    }
+  }
+
+  .dashboardLink {
+    @apply flex gap-3 items-center text-neutral-500 text-xl font-semibold p-2 rounded-lg duration-300;
+
+    &.active,
+    &:hover {
+      @apply text-white bg-main-clr shadow-md shadow-main-clr/30;
+    }
+  }
+
+  .dashboardCard {
+    @apply flex flex-col md:flex-row items-center gap-2 justify-between p-2 rounded-lg shadow-lg 
+    shadow-main-clr/50 even:bg-gray-100 hover:bg-main-clr/20 transition-colors;
+  }
+
+  .categoryLink {
+    @apply bg-main-clr text-white text-lg font-semibold capitalize px-4 py-2 rounded-full border-2 duration-300;
+
+    &.active,
+    &:hover {
+      @apply text-main-clr bg-white;
+    }
+  }
+}
+
+body {
+  font-family: "Philosopher", sans-serif;
+  background-color: var(--bg-clr);
+}
+
+/* scrollbar */
+::-webkit-scrollbar {
+  width: 18px;
+  height: 15px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--main-clr);
+  border-radius: 30px;
+  border: 3px solid var(--bg-clr);
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #01071c;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--bg-clr);
+}
