@@ -8,9 +8,13 @@ import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import { actUpdateProfile } from "../../store/profile/profileActions";
 import { closeModals } from "../../store/modals/modalsSlice";
+import { toast } from "react-toastify";
 
 const UpdateProfileModal = () => {
   const { updateLoading, updateError } = useSelector((state) => state.profile);
+
+  const { updateProfileModal } = useSelector((state) => state.modals);
+  const { initialName, initialBio } = updateProfileModal.data;
 
   const dispatch = useDispatch();
 
@@ -20,15 +24,22 @@ const UpdateProfileModal = () => {
 
   const formik = useFormik({
     initialValues: {
-      username: "",
+      username: initialName || "",
       password: "",
-      bio: "",
+      bio: initialBio || "",
     },
     validationSchema: Yup.object({
       username: Yup.string()
         .trim()
         .min(3, "Username must be at least 3 characters"),
-      password: Yup.string().trim().min(6, "Must be at least 6 characters"),
+      password: Yup.string()
+        .trim()
+        .min(8, "Password Must be at least 8 characters"),
+      // .min(8, "Password Must be at least 8 characters")
+      // .matches(/[a-z]/, "Password Must include a lowercase letter")
+      // .matches(/[A-Z]/, "Password Must include an uppercase letter")
+      // .matches(/\d/, "Password Must include a number")
+      // .matches(/[@$!%*?&#]/, "Password Must include a special character"),
       bio: Yup.string().trim(),
     }),
     onSubmit: async (values) => {
@@ -39,11 +50,8 @@ const UpdateProfileModal = () => {
         );
 
         await dispatch(actUpdateProfile(filteredValues)).unwrap();
-        await Swal.fire({
-          title: "Update Success",
-          text: "Profile updated successfully",
-          icon: "success",
-        });
+
+        toast.success("Profile updated successfully");
         onClose();
       } catch (err) {
         console.log(err);

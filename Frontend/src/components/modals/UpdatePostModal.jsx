@@ -8,12 +8,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { closeModals } from "../../store/modals/modalsSlice";
 import Swal from "sweetalert2";
 import { actUpdatePost } from "../../store/posts/postsActions";
+import { toast } from "react-toastify";
 
 const UpdatePostModal = () => {
   const { updateLoading, updateError } = useSelector((state) => state.posts);
 
   const { updatePostModal } = useSelector((state) => state.modals);
-  const { id } = updatePostModal.data;
+  const { id, initialTitle, initialDescription } = updatePostModal.data;
 
   const dispatch = useDispatch();
 
@@ -23,8 +24,8 @@ const UpdatePostModal = () => {
 
   const formik = useFormik({
     initialValues: {
-      title: "",
-      description: "",
+      title: initialTitle || "",
+      description: initialDescription || "",
     },
     validationSchema: Yup.object({
       title: Yup.string().trim().min(3, "Title must be at least 3 characters"),
@@ -42,11 +43,7 @@ const UpdatePostModal = () => {
           actUpdatePost({ postId: id, formData: filteredValues })
         ).unwrap();
 
-        await Swal.fire({
-          title: "Update Success",
-          text: "Post updated successfully",
-          icon: "success",
-        });
+        toast.success("Post updated successfully");
 
         onClose();
       } catch (err) {

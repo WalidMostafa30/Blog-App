@@ -89,7 +89,7 @@ const DashboardPosts = () => {
           ))}
         </div>
       ) : (
-        <Error errorType={"empty"} errorMsg={"No posts found."} />
+        <Error errorType={"empty"} errorMsg={"No posts yet.."} />
       )}
     </>
   );

@@ -64,7 +64,12 @@ const Profile = () => {
   };
 
   const handleUpdateProfileModal = () => {
-    dispatch(openUpdateProfileModal());
+    dispatch(
+      openUpdateProfileModal({
+        initialBio: profile?.bio || "",
+        initialName: profile?.username || "",
+      })
+    );
     setProfileMenu(false);
   };
 

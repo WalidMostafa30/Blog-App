@@ -11,6 +11,7 @@ import FormBtn from "../../components/form/FormBtn";
 import { useEffect } from "react";
 import { actGetCategories } from "../../store/categories/categoriesActions";
 import { cleanCategories } from "../../store/categories/categoriesSlice";
+import { toast } from "react-toastify";
 
 const CreateNewPost = () => {
   const { categories } = useSelector((state) => state.categories);
@@ -32,9 +33,9 @@ const CreateNewPost = () => {
       image: null,
     },
     validationSchema: Yup.object({
-      title: Yup.string().trim().required("Title is required"),
+      title: Yup.string().trim().min(3, "Title must be at least 3 characters").required("Title is required"),
       category: Yup.string().trim().required("Category is required"),
-      description: Yup.string().trim().required("Description is required"),
+      description: Yup.string().trim().min(5, "Description must be at least 5 characters").required("Description is required"),
       image: Yup.mixed()
         .required("Image is required")
         .test("fileSize", "Image size must be less than 1MB", (value) => {
@@ -50,11 +51,8 @@ const CreateNewPost = () => {
 
       try {
         await dispatch(actCreateNewPost(values)).unwrap();
-        await Swal.fire({
-          title: "Create Success",
-          text: "Post created successfully",
-          icon: "success",
-        });
+
+        toast.success("Post created successfully");
 
         navigate("/");
       } catch (err) {

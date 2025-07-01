@@ -18,7 +18,9 @@ const FormInput = ({
           value={value}
           onChange={onChange}
           onBlur={onBlur}
-          className="w-full text-lg font-sans p-2 border border-main-clr rounded-md focus:outline-none focus:ring-2 focus:border-main-clr focus:ring-main-clr cursor-pointer"
+          className={`w-full text-lg font-sans p-2 border border-main-clr rounded-md focus:outline-none focus:ring-2 focus:ring-main-clr cursor-pointer ${
+            touched && error ? "border-red-600 focus:ring-red-600" : ""
+          }`}
         >
           {options?.map((option) => (
             <option key={option.value} value={option.value}>
@@ -42,7 +44,9 @@ const FormInput = ({
           value={value}
           onChange={onChange}
           onBlur={onBlur}
-          className="w-full min-h-36 max-h-36 text-lg font-sans p-2 border border-main-clr rounded-md focus:outline-none focus:ring-2 focus:border-main-clr focus:ring-main-clr"
+          className={`w-full min-h-36 max-h-36 text-lg font-sans p-2 border border-main-clr rounded-md focus:outline-none focus:ring-2 focus:ring-main-clr ${
+            touched && error ? "border-red-600 focus:ring-red-600" : ""
+          }`}
           rows={4}
         />
         {touched && error && (
@@ -61,7 +65,9 @@ const FormInput = ({
         value={value}
         onChange={onChange}
         onBlur={onBlur}
-        className="w-full text-lg font-sans p-2 border border-main-clr rounded-md focus:outline-none focus:ring-2 focus:border-main-clr focus:ring-main-clr"
+        className={`w-full text-lg font-sans p-2 border border-main-clr rounded-md focus:outline-none focus:ring-2 focus:ring-main-clr ${
+          touched && error ? "border-red-600 focus:ring-red-600" : ""
+        }`}
       />
       {touched && error && <p className="text-red-600 text-sm mt-1">{error}</p>}
     </div>

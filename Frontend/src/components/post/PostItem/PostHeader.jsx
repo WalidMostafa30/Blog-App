@@ -12,6 +12,7 @@ import {
 import { actDeletePost } from "../../../store/posts/postsActions";
 import Swal from "sweetalert2";
 import UserTimeSection from "../../common/UserTimeSection/UserTimeSection";
+import { toast } from "react-toastify";
 
 const PostHeader = ({ post, details, postMenu, setPostMenu }) => {
   const { user } = useSelector((state) => state.auth);
@@ -24,7 +25,13 @@ const PostHeader = ({ post, details, postMenu, setPostMenu }) => {
   };
 
   const handleUpdatePostModal = () => {
-    dispatch(openUpdatePostModal({ id: post._id }));
+    dispatch(
+      openUpdatePostModal({
+        id: post._id,
+        initialTitle: post.title,
+        initialDescription: post.description,
+      })
+    );
     setPostMenu(false);
   };
 
@@ -42,8 +49,7 @@ const PostHeader = ({ post, details, postMenu, setPostMenu }) => {
         dispatch(actDeletePost(post._id));
         navigate(`/`);
         setPostMenu(false);
-
-        Swal.fire("Deleted!", "Your post has been deleted.", "success");
+        toast.success("Post deleted successfully");
       }
     });
   };

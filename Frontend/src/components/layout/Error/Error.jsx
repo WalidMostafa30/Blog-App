@@ -1,5 +1,5 @@
-import EmptySvg from "../../../assets/svg/emptySvg.svg?react";
-import ServerErrorSvg from "../../../assets/svg/503ErrorSvg.svg?react";
+import { FaBoxOpen } from "react-icons/fa";
+import { MdError } from "react-icons/md";
 
 const Error = ({
   errorMsg = "Something went wrong",
@@ -9,11 +9,11 @@ const Error = ({
     <article className="flex items-center justify-center w-full">
       <div className="p-4 mx-auto">
         {errorType === "empty" ? (
-          <EmptySvg className="w-64" />
+          <FaBoxOpen className="text-8xl text-main-clr mx-auto" />
         ) : (
-          <ServerErrorSvg className="w-64" />
+          <MdError className="text-8xl text-main-clr mx-auto" />
         )}
-        <h3 className="text-3xl font-bold text-center">{errorMsg}</h3>
+        <h3 className="text-3xl font-bold text-center mt-4">{errorMsg}</h3>
       </div>
     </article>
   );

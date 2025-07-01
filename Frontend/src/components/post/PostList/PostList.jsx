@@ -18,7 +18,7 @@ const PostList = ({ posts = [], showCategories = true, loading, error }) => {
           ))}
         </div>
       ) : (
-        <Error errorType={"empty"} errorMsg={"No posts found"} />
+        <Error errorType={"empty"} errorMsg={"No posts yet.."} />
       )}
     </section>
   );

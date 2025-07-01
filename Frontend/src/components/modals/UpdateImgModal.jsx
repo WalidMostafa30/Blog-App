@@ -9,6 +9,7 @@ import Swal from "sweetalert2";
 import { actUpdatePostPhoto } from "../../store/posts/postsActions";
 import { actUpdateProfilePhoto } from "../../store/profile/profileActions";
 import { closeModals } from "../../store/modals/modalsSlice";
+import { toast } from "react-toastify";
 
 const UpdateImgModal = () => {
   const posts = useSelector((state) => state.posts);
@@ -57,11 +58,8 @@ const UpdateImgModal = () => {
         await dispatch(actUpdateProfilePhoto(formData)).unwrap();
       }
       onClose();
-      Swal.fire({
-        title: "Update Success",
-        text: "Image updated successfully",
-        icon: "success",
-      });
+
+      toast.success("Image updated successfully");
     } catch (err) {
       console.log(err);
       Swal.fire({

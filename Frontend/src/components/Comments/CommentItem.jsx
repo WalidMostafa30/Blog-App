@@ -8,6 +8,7 @@ import { HiDotsVertical } from "react-icons/hi";
 import { openUpdateCommentModal } from "../../store/modals/modalsSlice";
 import Swal from "sweetalert2";
 import UserTimeSection from "../common/UserTimeSection/UserTimeSection";
+import { toast } from "react-toastify";
 
 const CommentItem = ({ comment }) => {
   const { user } = useSelector((state) => state.auth);
@@ -37,7 +38,7 @@ const CommentItem = ({ comment }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         dispatch(actDeleteComment(comment?._id));
-        Swal.fire("Deleted!", "Your post has been deleted.", "success");
+        toast.success("Comment deleted successfully");
       }
     });
   };

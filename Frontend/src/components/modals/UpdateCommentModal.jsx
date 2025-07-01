@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { actUpdateComment } from "../../store/comments/commentsActions";
 import { closeModals } from "../../store/modals/modalsSlice";
 import Swal from "sweetalert2";
+import { toast } from "react-toastify";
 
 const UpdateCommentModal = () => {
   const { updateLoading, updateError } = useSelector((state) => state.comments);
@@ -39,11 +40,7 @@ const UpdateCommentModal = () => {
           })
         ).unwrap();
 
-        await Swal.fire({
-          title: "Update Success",
-          text: "Comment updated successfully",
-          icon: "success",
-        });
+        toast.success("Comment updated successfully");
 
         onClose();
       } catch (err) {

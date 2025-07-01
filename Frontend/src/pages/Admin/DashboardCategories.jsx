@@ -74,7 +74,7 @@ const DashboardCategories = () => {
           ))}
         </div>
       ) : (
-        <Error errorType={"empty"} errorMsg="No Categories found." />
+        <Error errorType={"empty"} errorMsg="No Categories yet.." />
       )}
     </>
   );

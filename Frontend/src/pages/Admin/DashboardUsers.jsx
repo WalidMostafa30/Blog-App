@@ -92,7 +92,7 @@ const DashboardUsers = () => {
           ))}
         </div>
       ) : (
-        <Error errorType={"empty"} errorMsg={"No users found."} />
+        <Error errorType={"empty"} errorMsg={"No users yet.."} />
       )}
     </>
   );

@@ -81,7 +81,7 @@ const DashboardComments = () => {
           ))}
         </div>
       ) : (
-        <Error errorType={"empty"} errorMsg={"No comments found."} />
+        <Error errorType={"empty"} errorMsg={"No comments yet.."} />
       )}
     </>
   );

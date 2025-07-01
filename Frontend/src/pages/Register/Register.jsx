@@ -33,12 +33,12 @@ const Register = () => {
       password: Yup.string()
         .trim()
         .required("Password is required")
-        .min(8, "Must be at least 8 characters"),
-      // .min(8, "Must be at least 8 characters")
-      // .matches(/[a-z]/, "Must include a lowercase letter")
-      // .matches(/[A-Z]/, "Must include an uppercase letter")
-      // .matches(/\d/, "Must include a number")
-      // .matches(/[@$!%*?&#]/, "Must include a special character"),
+        .min(8, "Password Must be at least 8 characters"),
+      // .min(8, "Password Must be at least 8 characters")
+      // .matches(/[a-z]/, "Password Must include a lowercase letter")
+      // .matches(/[A-Z]/, "Password Must include an uppercase letter")
+      // .matches(/\d/, "Password Must include a number")
+      // .matches(/[@$!%*?&#]/, "Password Must include a special character"),
       confirmPassword: Yup.string()
         .trim()
         .oneOf([Yup.ref("password")], "Passwords must match")
