@@ -8,8 +8,7 @@ const NavBar = ({ activeNav, setActiveNav, user }) => {
   return (
     <nav
       className={`fixed left-0 top-[var(--header-height)] z-50 w-screen h-[calc(100dvh-var(--header-height))] 
-              bg-bg-clr flex flex-col items-center justify-center gap-4 
-              duration-500 
+              bg-bg-clr flex flex-col items-center justify-center duration-300 ease-in-out
               xl:static xl:flex-row xl:justify-start xl:w-2/5 xl:h-full 
               ${
                 activeNav
@@ -18,9 +17,7 @@ const NavBar = ({ activeNav, setActiveNav, user }) => {
               }`}
     >
       <NavLink to={"/"} onClick={() => setActiveNav(false)} className="navLink">
-        <span className="text-main-clr">
-          <IoHomeSharp />
-        </span>
+        <IoHomeSharp />
         Home
       </NavLink>
       <NavLink
@@ -28,9 +25,7 @@ const NavBar = ({ activeNav, setActiveNav, user }) => {
         onClick={() => setActiveNav(false)}
         className="navLink"
       >
-        <span className="text-main-clr">
-          <BsFilePostFill />
-        </span>
+        <BsFilePostFill />
         Posts
       </NavLink>
       {user?.isAdmin && (
@@ -39,22 +34,17 @@ const NavBar = ({ activeNav, setActiveNav, user }) => {
           onClick={() => setActiveNav(false)}
           className="navLink"
         >
-          <span className="text-main-clr">
-            <MdSpaceDashboard />
-          </span>
+          <MdSpaceDashboard />
           Dashboard
         </NavLink>
       )}
-
       {user && (
         <NavLink
           to={"/create-post"}
           onClick={() => setActiveNav(false)}
           className="navLink"
         >
-          <span className="text-main-clr">
-            <LuNotebookPen />
-          </span>
+          <LuNotebookPen />
           Create Post
         </NavLink>
       )}

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { FaUser, FaUserPlus } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { IoMdArrowDropdown } from "react-icons/io";
@@ -10,6 +10,7 @@ import DropDown from "../../common/DropDown/DropDown";
 const HeaderRight = ({ user }) => {
   const [userDropdown, setUserDropdown] = useState(false);
   const dispatch = useDispatch();
+  const triggerRef = useRef(null); 
 
   const handleUserLogout = () => {
     setUserDropdown(false);
@@ -21,13 +22,13 @@ const HeaderRight = ({ user }) => {
       {user ? (
         <div className="relative">
           <button
+            ref={triggerRef} 
             className="flex items-center gap-1 cursor-pointer"
             onClick={() => setUserDropdown((prev) => !prev)}
           >
             <span className="text-3xl">
               <IoMdArrowDropdown />
             </span>
-
             <span className="w-10 h-10 rounded-full overflow-hidden">
               <img
                 src={user.profilePhoto}
@@ -38,8 +39,11 @@ const HeaderRight = ({ user }) => {
             </span>
           </button>
 
-          {userDropdown && (
-            <DropDown>
+            <DropDown
+              open={userDropdown}
+              triggerRef={triggerRef} 
+              onClose={() => setUserDropdown(false)}
+            >
               <h3 className="text-xl font-semibold line-clamp-1 capitalize">
                 {user.username}
               </h3>
@@ -61,7 +65,6 @@ const HeaderRight = ({ user }) => {
                 Logout
               </button>
             </DropDown>
-          )}
         </div>
       ) : (
         <div className="flex items-center gap-2">

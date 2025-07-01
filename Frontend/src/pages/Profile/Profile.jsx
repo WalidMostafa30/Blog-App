@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import profileImg from "../../assets/images/user-avatar.png";
 import { TbEdit } from "react-icons/tb";
 import { FaImage } from "react-icons/fa";
@@ -32,6 +32,7 @@ const Profile = () => {
   const { profile, loading, error } = useSelector((state) => state.profile);
 
   const [profileMenu, setProfileMenu] = useState(false);
+  const triggerRef = useRef(null);
 
   const handleDeleteProfile = async () => {
     const result = await Swal.fire({
@@ -110,37 +111,38 @@ const Profile = () => {
         {user?._id === profile?._id && (
           <div className="absolute top-2 end-2">
             <button
+              ref={triggerRef}
               onClick={() => setProfileMenu((prev) => !prev)}
               className="text-3xl bg-white text-main-clr w-10 h-10 flex items-center justify-center rounded-full cursor-pointer"
             >
               <HiDotsVertical />
             </button>
 
-            {profileMenu && (
-              <DropDown
-                onClose={() => setProfileMenu(false)}
-                className="absolute w-62 flex flex-col gap-1 p-2 top-[calc(100%+15px)] end-0 bg-bg-clr shadow-lg shadow-main-clr/50 rounded-lg overflow-hidden"
-              >
-                <button className="myBtn" onClick={handleUpdateProfileModal}>
-                  <span className="text-3xl">
-                    <TbEdit />
-                  </span>
-                  Update Profile
-                </button>
-                <button className="myBtn" onClick={handleUpdateImgModal}>
-                  <span className="text-3xl">
-                    <FaImage />
-                  </span>
-                  Update Photo
-                </button>
-                <button className="myBtn danger" onClick={handleDeleteProfile}>
-                  <span className="text-3xl">
-                    <MdDeleteOutline />
-                  </span>
-                  Delete Profile
-                </button>
-              </DropDown>
-            )}
+            <DropDown
+              open={profileMenu}
+              triggerRef={triggerRef}
+              onClose={() => setProfileMenu(false)}
+              className="absolute w-62 flex flex-col gap-1 p-2 top-[calc(100%+15px)] end-0 bg-bg-clr shadow-lg shadow-main-clr/50 rounded-lg overflow-hidden"
+            >
+              <button className="myBtn" onClick={handleUpdateProfileModal}>
+                <span className="text-3xl">
+                  <TbEdit />
+                </span>
+                Update Profile
+              </button>
+              <button className="myBtn" onClick={handleUpdateImgModal}>
+                <span className="text-3xl">
+                  <FaImage />
+                </span>
+                Update Photo
+              </button>
+              <button className="myBtn danger" onClick={handleDeleteProfile}>
+                <span className="text-3xl">
+                  <MdDeleteOutline />
+                </span>
+                Delete Profile
+              </button>
+            </DropDown>
           </div>
         )}
       </div>

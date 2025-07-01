@@ -12,7 +12,7 @@ const Header = () => {
 
   return (
     <header className="fixed z-50 top-0 left-0 w-full bg-bg-clr shadow-md shadow-main-clr/50">
-      <div className="myContainer content-center h-[var(--header-height)] flex items-center justify-between">
+      <div className="container content-center h-[var(--header-height)] flex items-center justify-between">
         <NavBar activeNav={activeNav} setActiveNav={setActiveNav} user={user} />
 
         <div className="flex items-center gap-2">

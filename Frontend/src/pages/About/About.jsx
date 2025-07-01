@@ -1,6 +1,6 @@
 const About = () => {
   return (
-    <section className="myContainer mySection">
+    <section className="container mySection">
       <h2>Welcome to Blogify!</h2>
 
       <p>

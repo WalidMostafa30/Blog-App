@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { MdDeleteOutline } from "react-icons/md";
 import { TbEdit } from "react-icons/tb";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,6 +14,7 @@ const CommentItem = ({ comment }) => {
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const [commentMenu, setCommentMenu] = useState(false);
+  const triggerRef = useRef(null);
 
   const handleUpdateCommentModal = () => {
     dispatch(
@@ -56,28 +57,31 @@ const CommentItem = ({ comment }) => {
         {user && user?._id === comment?.user?._id && (
           <div className="relative">
             <span
-              onClick={() => setCommentMenu(true)}
+              onClick={() => setCommentMenu((prev) => !prev)}
+              ref={triggerRef}
               className="text-3xl cursor-pointer"
             >
               <HiDotsVertical />
             </span>
-            {commentMenu && (
-              <DropDown onClose={() => setCommentMenu(false)}>
-                <button className="myBtn" onClick={handleUpdateCommentModal}>
-                  <span className="text-3xl">
-                    <TbEdit />
-                  </span>
-                  Edit Comment
-                </button>
+            <DropDown
+              open={commentMenu}
+              triggerRef={triggerRef}
+              onClose={() => setCommentMenu(false)}
+            >
+              <button className="myBtn" onClick={handleUpdateCommentModal}>
+                <span className="text-3xl">
+                  <TbEdit />
+                </span>
+                Edit Comment
+              </button>
 
-                <button className="myBtn danger" onClick={handleDeleteComment}>
-                  <span className="text-3xl">
-                    <MdDeleteOutline />
-                  </span>
-                  Delete Comment
-                </button>
-              </DropDown>
-            )}
+              <button className="myBtn danger" onClick={handleDeleteComment}>
+                <span className="text-3xl">
+                  <MdDeleteOutline />
+                </span>
+                Delete Comment
+              </button>
+            </DropDown>
           </div>
         )}
       </div>

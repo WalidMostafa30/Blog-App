@@ -33,9 +33,18 @@ const CreateNewPost = () => {
       image: null,
     },
     validationSchema: Yup.object({
-      title: Yup.string().trim().min(3, "Title must be at least 3 characters").required("Title is required"),
-      category: Yup.string().trim().required("Category is required"),
-      description: Yup.string().trim().min(5, "Description must be at least 5 characters").required("Description is required"),
+      title: Yup.string()
+        .trim()
+        .min(3, "Title must be at least 3 characters")
+        .required("Title is required"),
+      category: Yup.string()
+        .trim()
+        .required("Category is required")
+        .notOneOf([""], "Please select a category"),
+      description: Yup.string()
+        .trim()
+        .min(5, "Description must be at least 5 characters")
+        .required("Description is required"),
       image: Yup.mixed()
         .required("Image is required")
         .test("fileSize", "Image size must be less than 1MB", (value) => {

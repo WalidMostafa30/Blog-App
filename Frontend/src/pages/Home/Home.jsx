@@ -37,12 +37,12 @@ const Home = () => {
         </div>
       </article>
 
-      <article className="myContainer py-8">
+      <article className="container py-8">
         <GlobalTitle title="Latest Posts" />
 
         <PostList posts={posts} showCategories={false} loading={isLoading} />
 
-        <Link to="/posts" className="myBtn light w-fit mx-auto mt-4">
+        <Link to="/posts" className="myBtn w-fit mx-auto mt-4">
           View All Posts
         </Link>
       </article>

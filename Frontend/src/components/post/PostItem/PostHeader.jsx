@@ -13,11 +13,14 @@ import { actDeletePost } from "../../../store/posts/postsActions";
 import Swal from "sweetalert2";
 import UserTimeSection from "../../common/UserTimeSection/UserTimeSection";
 import { toast } from "react-toastify";
+import { useRef } from "react";
 
 const PostHeader = ({ post, details, postMenu, setPostMenu }) => {
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const triggerRef = useRef(null);
 
   const handleUpdateImageModal = () => {
     dispatch(openUpdateImageModal({ action: "updatePostImage", id: post._id }));
@@ -71,28 +74,30 @@ const PostHeader = ({ post, details, postMenu, setPostMenu }) => {
           >
             <HiDotsVertical />
           </span>
-          {postMenu && (
-            <DropDown onClose={() => setPostMenu(false)}>
-              <button className="myBtn" onClick={handleUpdatePostModal}>
-                <span className="text-3xl">
-                  <TbEdit />
-                </span>
-                Edit Post
-              </button>
-              <button className="myBtn" onClick={handleUpdateImageModal}>
-                <span className="text-3xl">
-                  <FaImage />
-                </span>
-                Edit Image
-              </button>
-              <button className="myBtn danger" onClick={handleDeletePost}>
-                <span className="text-3xl">
-                  <MdDeleteOutline />
-                </span>
-                Delete Post
-              </button>
-            </DropDown>
-          )}
+          <DropDown
+            triggerRef={triggerRef}
+            open={postMenu}
+            onClose={() => setPostMenu(false)}
+          >
+            <button className="myBtn" onClick={handleUpdatePostModal}>
+              <span className="text-3xl">
+                <TbEdit />
+              </span>
+              Edit Post
+            </button>
+            <button className="myBtn" onClick={handleUpdateImageModal}>
+              <span className="text-3xl">
+                <FaImage />
+              </span>
+              Edit Image
+            </button>
+            <button className="myBtn danger" onClick={handleDeletePost}>
+              <span className="text-3xl">
+                <MdDeleteOutline />
+              </span>
+              Delete Post
+            </button>
+          </DropDown>
         </div>
       )}
     </div>

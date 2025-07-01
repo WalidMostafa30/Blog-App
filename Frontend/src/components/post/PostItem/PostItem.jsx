@@ -47,7 +47,7 @@ const PostItem = ({ post = {}, details = false }) => {
       ) : (
         <Link
           to={`/posts/post-details/${post._id}`}
-          className="text-xl text-main-clr underline mx-auto"
+          className="myBtn light w-fit mx-auto"
         >
           Read More
         </Link>

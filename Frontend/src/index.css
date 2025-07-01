@@ -11,18 +11,20 @@
   --color-main-clr: var(--main-clr);
 }
 
-@layer {
-  .myContainer {
-    @apply container px-4 mx-auto;
-  }
+/* custom container */
+@utility container {
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
 
+@layer {
   .mySection {
     @apply min-h-[calc(100dvh-var(--header-height))] mt-[var(--header-height)];
   }
 
   .myBtn {
     @apply bg-main-clr text-white text-lg lg:text-xl font-semibold px-2 py-1 lg:px-4 lg:py-2 
-    rounded-lg border-2 border-main-clr hover:brightness-70 duration-200 flex items-center gap-2 cursor-pointer;
+    rounded-lg border-2 border-main-clr duration-200 flex items-center gap-2 cursor-pointer;
 
     &.light {
       @apply bg-white text-main-clr;
@@ -31,19 +33,26 @@
     &.danger {
       @apply bg-red-700 text-white border-red-700;
     }
+
+    &:hover {
+      @apply brightness-70;
+    }
   }
 
   .navLink {
-    @apply text-4xl xl:text-xl xl:h-full flex items-center gap-1 content-center relative;
+    @apply text-3xl xl:text-xl xl:h-full w-full xl:w-auto flex xl:flex-col items-center justify-center gap-1 py-2 px-4 duration-200;
 
-    &::after {
-      @apply content-[''] absolute w-0 h-[3px] bg-main-clr left-0 
-      bottom-[-3px] xl:bottom-5 rounded-full duration-200;
+    svg {
+      @apply text-main-clr text-2xl duration-200;
     }
 
     &.active,
     &:hover {
-      @apply after:w-full;
+      @apply bg-main-clr text-white;
+
+      svg {
+        @apply text-white;
+      }
     }
   }
 
